@@ -54,7 +54,6 @@ const Login = () => {
 			<h1>Login</h1>
 
 			<form onSubmit={handleSubmit}>
-
 				<FormControl
 					text='Email'
 					error={touched.email && errors.email}
@@ -96,6 +95,9 @@ const Login = () => {
 					{isSubmitting ? "Submitting..." : "Submit"}
 				</button>
 			</form>
+			<div>
+				<a href='/signup'>don't have an account?</a>
+			</div>
 		</div>
 	)
 }
