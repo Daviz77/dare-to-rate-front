@@ -4,7 +4,6 @@ import { getAuthReviews } from "../../services/ReviewService"
 
 const Home = ({ currentUser }) => {
 	const [reviews, setReviews] = useState([])
-  const [user, setUser] = useState(currentUser)
   
   useEffect(() => {
     const fetchReviews = () => {
@@ -14,7 +13,7 @@ const Home = ({ currentUser }) => {
         })
     };
     fetchReviews();
-  }, [user]);
+  }, [currentUser]);
 
 	return (
 		<Container>

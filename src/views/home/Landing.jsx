@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import './Landing.css';
+import { getReviews } from '../../services/ReviewService';
 
 const Landing = () => {
+  const [reviews, setReviews] = useState([])
+  
+  useEffect(() => {
+    const fetchReviews = () => {
+      getReviews()
+        .then((reviews) => {
+          setReviews(reviews);
+        })
+    };
+    fetchReviews();
+  }, []);
   return (
     <Container>
       <Row className="my-5">
         <Col>
           <h1>Welcome to our movie review site!</h1>
           <p className="lead">Share your reviews with other movie lovers</p>
-          <Button variant="primary" as={Link} to="/signup">Signup</Button>
-          <Button variant="primary" as={Link} to="/login">Login</Button>
+         {/*  <Button variant="primary" as={Link} to="/signup">Signup</Button>
+          <Button variant="primary" as={Link} to="/login">Login</Button> */}
         </Col>
       </Row>
       <Row className="my-5">
@@ -24,6 +36,21 @@ const Landing = () => {
           <p>Register and dare to rate!.</p>
         </Col>
       </Row>
+      <Row>
+				{reviews.map((reviews) => (
+					<Col key={reviews._id} sm={12} md={6} lg={4} className='mb-3'>
+						<Card>
+							<Card.Body>
+								<Card.Title>{reviews.title}</Card.Title>
+								<Card.Subtitle className='mb-2 text-muted'>
+									{reviews.author.username}
+								</Card.Subtitle>
+								<Card.Text>{reviews.content}</Card.Text>
+							</Card.Body>
+						</Card>
+					</Col>
+				))}
+			</Row>
     </Container>
   );
 };

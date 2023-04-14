@@ -13,7 +13,7 @@ function App() {
 	const { isAuthLoaded, currentUser } = useContext(AuthContext)
 	return (
 		<div className='App'>
-			<Navbar />
+			<Navbar currentUser={currentUser}/>
 
 			<div className='container my-3'>
 				{!isAuthLoaded ? (
