@@ -6,13 +6,10 @@ const Home = ({ currentUser }) => {
 	const [reviews, setReviews] = useState([])
   
   useEffect(() => {
-    const fetchReviews = () => {
-      getAuthReviews()
-        .then((reviews) => {
-          setReviews(reviews);
-        })
-    };
-    fetchReviews();
+    getAuthReviews()
+      .then((reviews) => {
+        setReviews(reviews);
+      })
   }, [currentUser]);
 
 	return (
