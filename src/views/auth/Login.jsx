@@ -5,7 +5,6 @@ import Input from "../../components/imput/Imput"
 import { useContext } from "react"
 import AuthContext from "../../contexts/AuthContext"
 import { login as loginService } from "../../services/AuthService"
-import { setAccessToken } from "../../stores/AccessTokenStore"
 
 const initialValues = {
 	email: "",

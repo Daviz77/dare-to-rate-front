@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = useCallback((token) => {
     const navigateToProfile = () => {
-      navigate('/profile')
+      navigate('/home')
     }
     // Lo guaaardo
     setAccessToken(token);
