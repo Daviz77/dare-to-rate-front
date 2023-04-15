@@ -11,13 +11,14 @@ import Signup from "./views/auth/Signup"
 import Landing from "./views/home/Landing"
 import SearchBar from "./components/searchBar/SearchBar"
 import FilmList from "./components/FilmsList/FilmList"
+import ProfileUpdate from "./views/profile/profileUpdate/ProfileUpdate"
 // import { searchMovies } from "./services/FilmService"
 
 function App() {
 	const { isAuthLoaded, currentUser } = useContext(AuthContext)
 	const [movies, setMovies] = useState([])
 
-/* 	const handleSearch = (query) => {
+	/* 	const handleSearch = (query) => {
 		searchMovies(query)
 			.then((results) => {
 				setMovies(results)
@@ -30,7 +31,7 @@ function App() {
 	return (
 		<div className='App'>
 			<Navbar currentUser={currentUser} />
-{/* 
+			{/* 
 			<div>
 				<SearchBar onSearch={handleSearch} />
 				<FilmList movies={movies} />
@@ -53,6 +54,14 @@ function App() {
 							element={
 								<ProtectedRoute>
 									<Profile />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path='update-profile'
+							element={
+								<ProtectedRoute>
+									<ProfileUpdate />
 								</ProtectedRoute>
 							}
 						/>

@@ -44,7 +44,8 @@ export const AuthProvider = ({ children }) => {
     return {
       currentUser, // Usuario que está en sesión
       isAuthLoaded, // Si ya intenté saber si hay usuario en sesión
-      login // login
+      login, // login,
+      getCurrentUser,
     }
   }, [currentUser, isAuthLoaded, login])
 

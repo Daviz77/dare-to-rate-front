@@ -1,6 +1,9 @@
-import { createHttp } from './BaseService';
+import { createHttp } from "./BaseService"
 
-const authenticatedHttp = createHttp(true);
-const unauthenticatedHttp = createHttp(false);
+const authenticatedHttp = createHttp(true)
+const unauthenticatedHttp = createHttp(false)
 
-export const getCurrentUser = () => authenticatedHttp.get('/profile')
+export const getCurrentUser = () => authenticatedHttp.get("/profile")
+
+export const profileUpdate = (formData =>
+	authenticatedHttp.patch("/users", formData))
