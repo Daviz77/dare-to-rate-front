@@ -7,16 +7,32 @@ const Navbar = ({ currentUser }) => {
 	return (
 		<nav className='navbar navbar-expand-lg bg-primary' data-bs-theme='dark'>
 			<div className='container-fluid'>
-				<Link className='navbar-brand' to='/'>
-					Dare2Rate
-				</Link>
+				{currentUser ? (
+					<Link className='navbar-brand' to='home'>
+						Dare2Rate
+					</Link>
+				) : (
+					<Link className='navbar-brand' to=''>
+						Dare2Rate
+					</Link>
+				)}
+
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<ul className='navbar-nav me-auto mb-2 mb-lg-0'>
 						<li className='nav-item'>
 							{currentUser ? (
-								<Button onClick={logout}>Logout</Button>,
-								<Button href="update-profile">Update profile</Button>
-
+								<Link to='profile'>
+									<img
+										src={currentUser.img}
+										alt='Profile'
+										style={{
+											maxWidth: "50px",
+											maxHeight: "50px",
+											objectFit: "cover",
+											borderRadius: "30%",
+										}}
+									/>
+								</Link>
 							) : (
 								<NavLink
 									className={({ isActive }) =>
@@ -34,6 +50,5 @@ const Navbar = ({ currentUser }) => {
 		</nav>
 	)
 }
-
 
 export default Navbar

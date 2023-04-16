@@ -43,7 +43,7 @@ function App() {
 				) : (
 					<Routes>
 						{currentUser ? (
-							<Route path='/' element={<Home />} />
+							<Route path='home' element={<Home />} />
 						) : (
 							<Route path='/' element={<Landing />} />
 						)}

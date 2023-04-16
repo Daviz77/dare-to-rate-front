@@ -36,10 +36,13 @@ const Signup = () => {
 				username: values.username,
 				email: values.email,
 				password: values.password,
+				about: values.about,
 				img: values.img,
-			}) 
-				.then(() => loginService({ email: values.email, password: values.password }))
-				.then((response) => { 				
+			})
+				.then(() =>
+					loginService({ email: values.email, password: values.password })
+				)
+				.then((response) => {
 					login(response.accessToken)
 				})
 				.catch((err) => {
@@ -58,8 +61,7 @@ const Signup = () => {
 			<h1>Signup</h1>
 
 			<form onSubmit={handleSubmit}>
-
-			<FormControl
+				<FormControl
 					text='Username'
 					error={touched.username && errors.username}
 					htmlFor='username'
@@ -92,6 +94,23 @@ const Signup = () => {
 				</FormControl>
 
 				<FormControl
+					text='About'
+					error={touched.about && errors.about}
+					htmlFor='about'
+				>
+					<Input
+						id='about'
+						name='about'
+						type='textarea'
+						onChange={handleChange}
+						onBlur={handleBlur}
+						value={values.about}
+						error={touched.about && errors.about}
+						placeholder='Tell us about you...'
+					/>
+				</FormControl>
+
+				<FormControl
 					text='Password'
 					error={touched.password && errors.password}
 					htmlFor='password'
@@ -108,17 +127,19 @@ const Signup = () => {
 					/>
 				</FormControl>
 
-				<FormControl
+			<FormControl
 					text='Image'
 					error={touched.img && errors.img}
 					htmlFor='img'
 				>
 					<Input
 						id='img'
+						type='file'
 						name='img'
-						onChange={handleChange}
+						onChange={(event) => {
+							setFieldValue("img", event.currentTarget.files[0])
+						}}
 						onBlur={handleBlur}
-						value={values.img}
 						error={touched.img && errors.img}
 						placeholder='Upload your image...'
 					/>
