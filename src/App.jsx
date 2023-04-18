@@ -16,7 +16,7 @@ import ProfileUpdate from "./views/profile/profileUpdate/ProfileUpdate"
 
 function App() {
 	const { isAuthLoaded, currentUser } = useContext(AuthContext)
-	const [movies, setMovies] = useState([])
+	//const [movies, setMovies] = useState([])
 
 	/* 	const handleSearch = (query) => {
 		searchMovies(query)

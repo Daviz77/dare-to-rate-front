@@ -1,22 +1,31 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { filterFilmById, filterFilmByTitle } from '../../services/FilmService';
 
-function SearchBar({ onSearch }) {
-  const [query, setQuery] = useState("");
+function SearchBar({ filterFilmByTitle }) {
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
 
-  const handleChange = (event) => {
+  const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-    onSearch(query);
+    searchMovies(query).then((movies) => setMovies(movies));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={query} onChange={handleChange} />
-      <button type="submit">Search movies:</button>
-    </form>
+    <div>
+      <form onSubmit={handleSearch}>
+        <input type="text" value={query} onChange={handleInputChange} />
+        <button type="submit">Buscar</button>
+      </form>
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>{movie.title}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

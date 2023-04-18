@@ -14,7 +14,7 @@ const ProfileUpdate = () => {
 
 	const initialValues = {
 		username: currentUser.username,
-		img: currentUser.img,
+		image: currentUser.image,
 		about: currentUser.about,
 	}
 
@@ -37,7 +37,7 @@ const ProfileUpdate = () => {
 			const formData = new FormData()
 
 			formData.append("username", values.username)
-			formData.append("img", values.img)
+			formData.append("image", values.image)
 			formData.append("about", values.about)
 
 			profileUpdate(formData)
@@ -78,7 +78,7 @@ const ProfileUpdate = () => {
 
 				<FormControl
 					text='About'
-					error={touched.img && errors.img}
+					error={touched.about && errors.about}
 					htmlFor='about'
 				>
 					<Input
@@ -95,18 +95,18 @@ const ProfileUpdate = () => {
 
 				<FormControl
 					text='Image'
-					error={touched.img && errors.img}
-					htmlFor='img'
+					error={touched.image && errors.image}
+					htmlFor='image'
 				>
 					<Input
-						id='img'
+						id='image'
 						type='file'
-						name='img'
+						name='image'
 						onChange={(event) => {
-							setFieldValue("img", event.currentTarget.files[0])
+							setFieldValue("image", event.currentTarget.files[0])
 						}}
 						onBlur={handleBlur}
-						error={touched.img && errors.img}
+						error={touched.image && errors.image}
 						placeholder='Upload your image...'
 					/>
 				</FormControl>

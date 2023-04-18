@@ -1,7 +1,4 @@
-import { Button } from "react-bootstrap"
-import { Link, NavLink } from "react-router-dom"
-import { logout } from "../../stores/AccessTokenStore"
-import { profileUpdate } from "../../services/UserService"
+import { Link, NavLink } from 'react-router-dom'
 
 const Navbar = ({ currentUser }) => {
 	return (
@@ -17,8 +14,8 @@ const Navbar = ({ currentUser }) => {
 					</Link>
 				)}
 
-				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
-					<ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+				<div className='navbar' id='navbarSupportedContent'>
+					<ul className='navbar-links me-auto mb-2 mb-lg-0'>
 						<li className='nav-item'>
 							{currentUser ? (
 								<Link to='profile'>
@@ -26,21 +23,21 @@ const Navbar = ({ currentUser }) => {
 										src={currentUser.img}
 										alt='Profile'
 										style={{
-											maxWidth: "50px",
-											maxHeight: "50px",
-											objectFit: "cover",
-											borderRadius: "30%",
+											maxWidth: '50px',
+											maxHeight: '50px',
+											objectFit: 'cover',
+											borderRadius: '30%',
 										}}
 									/>
 								</Link>
 							) : (
-								<NavLink
-									className={({ isActive }) =>
-										`nav-link ${isActive ? "active" : ""}`
-									}
-									to='/login'
-								>
+								<NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/login'>
 									Login
+								</NavLink>
+							)}
+							{currentUser ? null : (
+								<NavLink className='nav-link' to='/signup'>
+									Signup
 								</NavLink>
 							)}
 						</li>

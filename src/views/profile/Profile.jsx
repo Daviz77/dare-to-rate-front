@@ -1,25 +1,21 @@
-import { useContext, useEffect, useState } from "react"
-import AuthContext from "../../contexts/AuthContext"
-import "./Profile.css"
-// import { userFollowers, userFollowing } from "../../services/UserService"
-import { Link } from "react-router-dom"
-import { Button } from "react-bootstrap"
-import { logout } from "../../stores/AccessTokenStore"
+import { useContext, useEffect, useState } from 'react'
+import AuthContext from '../../contexts/AuthContext'
+import './Profile.css'
+import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+import { logout } from '../../stores/AccessTokenStore'
+import { getUserFollowers } from '../../services/UserService'
 
 const Profile = () => {
-	const { currentUser } = useContext(AuthContext)
-	const { username, email, img, about } = currentUser
+	const { currentUser, getCurrentUser } = useContext(AuthContext)
+	const { username, email, img, about, followings } = currentUser
 	const [followers, setFollowers] = useState([])
-	const [followin, setFollowing] = useState([])
 
-/* 	useEffect(() => {
-		userFollowers(currentUser)
+	useEffect(() => {
+		getUserFollowers(currentUser.id)
 			.then((data) => setFollowers(data))
 			.catch((error) => console.error(error))
-		userFollowing(currentUser)
-			.then((data) => setFollowing(data))
-			.catch((error) => console.error(error))
-	}, [currentUser]) */
+	}, [currentUser])
 
 	return (
 		<div className='profile'>
@@ -30,18 +26,18 @@ const Profile = () => {
 			<div className='profile__content'>
 				<p className='profile__email'>{email}</p>
 				<p className='profile__about'>{about}</p>
-			{/* 	<div className='profile__stats'>
+				<div className='profile__stats'>
 					<p className='profile__stat'>
-						<span className='profile__stat-number'>{followers}</span>
 						<span className='profile__stat-label'>Followers:</span>
+						<span className='profile__stat-number'>{followers.length}</span>
 					</p>
 					<p className='profile__stat'>
-						<span className='profile__stat-number'>{followin}</span>
 						<span className='profile__stat-label'>Following:</span>
+						<span className='profile__stat-number'>{followings.length}</span>
 					</p>
-				</div> */}
+				</div>
 			</div>
-			<div className="button__container">
+			<div className='button__container'>
 				<div className='button__update__profile'>
 					<Link to='/update-profile'>
 						<Button variant='primary'>Update Profile</Button>
