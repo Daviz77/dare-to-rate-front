@@ -1,32 +1,20 @@
-import React, { useState } from 'react';
-import { filterFilmById, filterFilmByTitle } from '../../services/FilmService';
+import React from 'react'
+import { getFilmByTitle } from '../../services/FilmService'
+import { useNavigate } from 'react-router-dom'
 
-function SearchBar({ filterFilmByTitle }) {
-  const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
+function SearchBar() {
+	const navigate = useNavigate()
+	const handleSearch = (event) => {
+		event.preventDefault()
+		navigate(`/films?title=${event.target.value}`)
+	}
 
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    searchMovies(query).then((movies) => setMovies(movies));
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSearch}>
-        <input type="text" value={query} onChange={handleInputChange} />
-        <button type="submit">Buscar</button>
-      </form>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
+	const handleKeyPress = (event) => {
+		if (event.key === 'Enter') {
+			handleSearch(event)
+		}
+	}
+	return <input type='text' placeholder='Search movie...' onKeyDown={handleKeyPress} />
 }
 
-export default SearchBar;
+export default SearchBar

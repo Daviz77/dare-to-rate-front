@@ -32,9 +32,8 @@ const Login = () => {
 			loginService({
 				email: values.email,
 				password: values.password,
-			}) // llama a /login del back pasandole el email y la password
+			})
 				.then((response) => {
-					// Usar el login del contexto
 					login(response.accessToken)
 				})
 				.catch((err) => {

@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import SearchBar from '../searchBar/SearchBar'
 
 const Navbar = ({ currentUser }) => {
 	return (
@@ -14,34 +15,32 @@ const Navbar = ({ currentUser }) => {
 					</Link>
 				)}
 
+				<SearchBar />
+
 				<div className='navbar' id='navbarSupportedContent'>
-					<ul className='navbar-links me-auto mb-2 mb-lg-0'>
-						<li className='nav-item'>
-							{currentUser ? (
-								<Link to='profile'>
-									<img
-										src={currentUser.img}
-										alt='Profile'
-										style={{
-											maxWidth: '50px',
-											maxHeight: '50px',
-											objectFit: 'cover',
-											borderRadius: '30%',
-										}}
-									/>
-								</Link>
-							) : (
-								<NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/login'>
-									Login
-								</NavLink>
-							)}
-							{currentUser ? null : (
-								<NavLink className='nav-link' to='/signup'>
-									Signup
-								</NavLink>
-							)}
-						</li>
-					</ul>
+					{currentUser ? (
+						<Link to='profile'>
+							<img
+								src={currentUser.img}
+								alt='Profile'
+								style={{
+									maxWidth: '50px',
+									maxHeight: '50px',
+									objectFit: 'cover',
+									borderRadius: '30%',
+								}}
+							/>
+						</Link>
+					) : (
+						<div>
+							<NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/login'>
+								Login
+							</NavLink>
+							<NavLink className='nav-link' to='/signup'>
+								Signup
+							</NavLink>
+						</div>
+					)}
 				</div>
 			</div>
 		</nav>

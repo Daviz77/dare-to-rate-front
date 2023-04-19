@@ -22,12 +22,12 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = useCallback((token) => {
-    const navigateToProfile = () => {
+    const navigateToHome = () => {
       navigate('/home')
     }
     // Lo guaaardo
     setAccessToken(token);
-    getCurrentUser(navigateToProfile)
+    getCurrentUser(navigateToHome)
 
   }, [getCurrentUser])
 
