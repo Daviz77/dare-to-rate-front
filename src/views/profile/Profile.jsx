@@ -57,6 +57,9 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
+			<>
+				<h2>Your Reviews</h2>
+			</>
 			{reviews.length > 0 && <ReviewList key={currentUser._id} reviews={reviews} isUserView={true} />}
 		</>
 	)

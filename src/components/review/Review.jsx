@@ -38,6 +38,7 @@ function Review(props) {
 			{isUserView ? (
 				<div>
 					<p>Film title: {film.title}</p>
+					<img src={film.poster} alt={film.title} />
 				</div>
 			) : (
 				<div>
