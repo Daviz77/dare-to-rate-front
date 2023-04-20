@@ -7,6 +7,7 @@ const Home = ({ currentUser }) => {
 
 	useEffect(() => {
 		getAuthReviews().then((reviews) => {
+			console.log(reviews)
 			setReviews(reviews)
 		})
 	}, [currentUser])

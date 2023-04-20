@@ -10,6 +10,7 @@ import Signup from './views/auth/Signup'
 import Landing from './views/home/Landing'
 import ProfileUpdate from './views/profile/profileUpdate/ProfileUpdate'
 import Film from './views/film/Film'
+import User from './views/user/User'
 
 function App() {
 	const { isAuthLoaded, currentUser } = useContext(AuthContext)
@@ -27,6 +28,7 @@ function App() {
 						<Route path='signup' element={<Signup />} />
 						<Route path='login' element={<Login />} />
 						<Route path='films' element={<Film />} />
+						<Route path='users/:userId' element={<User />} />
 						<Route
 							path='profile'
 							element={

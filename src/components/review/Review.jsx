@@ -53,7 +53,7 @@ function Review(props) {
 			{currentUser && (
 				<button onClick={() => handleLike(review._id)}>Like</button>
 			)}
-			{review.comments.length > 0 && (
+			{review.comments && review.comments.length > 0 && (
 				<>
 					<button onClick={() => setShowComments(!showComments)}>Show Comments</button>
 					{showComments && <CommentList key={_id} comments={review.comments} />}
