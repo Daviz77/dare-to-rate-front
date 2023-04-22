@@ -1,9 +1,13 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import SearchBar from '../searchBar/SearchBar'
+import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
+	const location = useLocation()
+	const hideNavLinks = location.pathname === '/login' || location.pathname === '/signup'
+
 	return (
-		<nav className='navbar navbar-expand-lg bg-primary' data-bs-theme='dark'>
+		<nav className='navbar navbar-expand-lg navbar-light'>
 			<div className='container-fluid'>
 				{currentUser ? (
 					<Link className='navbar-brand' to='home'>
@@ -14,31 +18,29 @@ const Navbar = ({ currentUser }) => {
 						Dare2Rate
 					</Link>
 				)}
-
 				<SearchBar />
-
 				<div className='navbar' id='navbarSupportedContent'>
 					{currentUser ? (
-						<Link to='profile'>
-							<img
-								src={currentUser.img}
-								alt='Profile'
-								style={{
-									maxWidth: '50px',
-									maxHeight: '50px',
-									objectFit: 'cover',
-									borderRadius: '30%',
-								}}
-							/>
+						<Link to='profile' className='no-decoration primary-color'>
+							Hello, {currentUser.username}{' '}
+							<img src={currentUser.img} alt='Profile' />
 						</Link>
 					) : (
-						<div>
-							<NavLink className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} to='/login'>
-								Login
-							</NavLink>
-							<NavLink className='nav-link' to='/signup'>
-								Signup
-							</NavLink>
+						<div className='d-flex'>
+							{!hideNavLinks && (
+								<>
+									<NavLink
+										className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+										to='/login'
+										style={{ marginRight: '10px' }}
+									>
+										Login
+									</NavLink>
+									<NavLink className='nav-link' to='/signup'>
+										Signup
+									</NavLink>
+								</>
+							)}
 						</div>
 					)}
 				</div>

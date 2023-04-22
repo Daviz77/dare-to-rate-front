@@ -1,0 +1,79 @@
+.bg-color {
+  background-color: #fbea7f;
+}
+
+.secondary-color {
+  color: #a3a3a3;
+}
+
+.primary-color {
+  color: #000;
+}
+
+.link-color {
+  color: #8f7ffa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #000;
+  border-color: #000;
+  border-radius: 2rem;
+}
+
+.btn-primary:hover {
+  background-color: #8f7ffa;
+  border-color: #8f7ffa;
+}
+
+.link-on-hover:hover {
+  color: #8f7ffa;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.card-author-username, .card-film-title {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+.list-item {
+  margin-top: 1rem;
+}
+
+.margin-1 {
+  margin: 1rem;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-left {
+  margin-left: 0;
+}
+
+/* .logo-img{
+  margin-bottom: 1rem;
+  margin-top: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+} */
+
+.my-3{
+  margin: 0rem !important;
+}

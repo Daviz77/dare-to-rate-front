@@ -1,0 +1,27 @@
+.comment-card {
+	margin-top: 2rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.avatar-img {
+	text-align: end;
+}
+
+.comment-username {
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+.comment-content {
+	margin-top: .3rem;
+}
+
+.comment-avatar  img{
+  width: 20px;
+  height: 20px;
+}
+
+

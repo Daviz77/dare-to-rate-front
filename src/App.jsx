@@ -11,6 +11,7 @@ import Landing from './views/home/Landing'
 import ProfileUpdate from './views/profile/profileUpdate/ProfileUpdate'
 import Film from './views/film/Film'
 import User from './views/user/User'
+import './App.css'
 
 function App() {
 	const { isAuthLoaded, currentUser } = useContext(AuthContext)
@@ -19,7 +20,7 @@ function App() {
 		<div className='App'>
 			<Navbar currentUser={currentUser} />
 
-			<div className='container my-3'>
+			<div className='my-3'>
 				{!isAuthLoaded ? (
 					<p>Loading...</p>
 				) : (
