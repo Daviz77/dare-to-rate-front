@@ -16,18 +16,11 @@ const Home = () => {
 
 	return (
 		<Container>
-			<Row className='my-5'>
-				<Col>
-					<h1>Latest followings users reviews</h1>
-				</Col>
-			</Row>
+			<h2>Whats new?</h2>
+			<h3>Reviews from those you follow</h3>
 			<ReviewList reviews={reviews?.followedReviews} />
 
-			<Row className='my-5'>
-				<Col>
-					<h1>Latest other users reviews</h1>
-				</Col>
-			</Row>
+			<h3 style={{marginTop: '2rem'}}>Reviews from others</h3>
 			<ReviewList reviews={reviews?.otherReviews} />
 		</Container>
 	)

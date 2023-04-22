@@ -1,17 +1,22 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import SearchBar from '../searchBar/SearchBar'
 import './Navbar.css'
+import Logo from '../../assets/Logo/Logo.svg'
 
 const Navbar = ({ currentUser }) => {
 	const location = useLocation()
 	const hideNavLinks = location.pathname === '/login' || location.pathname === '/signup'
+
+	const LogoDr = () => {
+		return <img src={Logo} alt='logo' className='logo-img' />
+	}
 
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light'>
 			<div className='container-fluid'>
 				{currentUser ? (
 					<Link className='navbar-brand' to='home'>
-						Dare2Rate
+						<LogoDr />
 					</Link>
 				) : (
 					<Link className='navbar-brand' to=''>
@@ -21,10 +26,12 @@ const Navbar = ({ currentUser }) => {
 				<SearchBar />
 				<div className='navbar' id='navbarSupportedContent'>
 					{currentUser ? (
-						<Link to='profile' className='no-decoration primary-color'>
-							Hello, {currentUser.username}{' '}
-							<img src={currentUser.img} alt='Profile' />
-						</Link>
+						<>
+							<span>Hello, {currentUser.username}</span>
+							<Link to='profile' className='no-decoration primary-color'>
+								<img src={currentUser.img} className='profile-img' alt='Profile' />
+							</Link>
+						</>
 					) : (
 						<div className='d-flex'>
 							{!hideNavLinks && (

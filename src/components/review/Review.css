@@ -5,4 +5,9 @@
 
 .follow-btn {
   padding: 0;
+  margin-top: 1rem;
+}
+
+#rating {
+  font-size: 2rem;
 }

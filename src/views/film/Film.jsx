@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { getFilmByTitle, getFilmReviews } from '../../services/FilmService'
 import ReviewList from '../../components/reviewsList/ReviewsList'
-import { Container } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
+import Star from '../../assets/Logo/Star.svg'
 
 function Film() {
 	const [film, setFilm] = useState({})
 	const [reviews, setReviews] = useState([])
 	const [searchParams] = useSearchParams()
-	const [showFullPlot, setShowFullPlot] = useState(false)
+	const [showFullDetails, setShowFullDetails] = useState(false)
 
-	const togglePlot = () => {
-		setShowFullPlot(!showFullPlot)
+	const StarIcon = () => {
+		return <img src={Star} alt='star' className='star-img' />
 	}
 
-	const shortPlot = film?.plot?.slice(0, 200) + '...'
+	const toggleDetails = () => {
+		setShowFullDetails(!showFullDetails)
+	}
+
+	const shortPlot = film?.plot?.slice(0, 800) + '...'
 
 	useEffect(() => {
 		getFilmByTitle(searchParams.get('title'))
@@ -26,18 +31,8 @@ function Film() {
 
 				if (film._id) {
 					getFilmReviews(film._id)
-						.then((reviews) => {
-							reviews.map((r) => {
-								r.authorName = r.author.username
-								r.authorImg = r.author.img
-								r.authorId = r.author._id
-								r.author = null
-							})
-							setReviews(reviews)
-						})
-						.catch((error) => {
-							console.log(error)
-						})
+						.then((reviews) => setReviews(reviews))
+						.catch((error) => console.log(error))
 				}
 			})
 			.catch((error) => {
@@ -46,32 +41,46 @@ function Film() {
 	}, [searchParams.get('title')])
 
 	return (
-		<div className='row' style={{ padding: '1rem', margin: '0' }}>
-			<div className='col-6 d-flex'>
-				<img src={film.poster} alt={film.title} />
-			</div>
-			<div className='col-6'>
-				<h1>Title: {film.title}</h1>
-				<p>Year: {film.year}</p>
-				<p>Director: {film.director}</p>
-				<div>
-					<p>Plot: {showFullPlot ? film.plot : shortPlot}</p>
-					{showFullPlot ? null : (
-						<button className='link-color' style={{border: 'none'}} onClick={togglePlot}>
-							Give more details
-						</button>
+		<Container>
+			<Row className='view-info'>
+				<Col md={4}>
+					<img src={film.poster} alt={film.title} />
+				</Col>
+				<Col md={8}>
+					<h1>{film.title}</h1>
+					<p>
+						<b>{film.director}</b>
+					</p>
+					<p>
+						<StarIcon />{' '}
+						<span>
+							<b id='rating'>{film.rating}</b>/10
+						</span>{' '}
+					</p>
+
+					<p>{showFullDetails ? film.plot : shortPlot}</p>
+					{showFullDetails && (
+						<>
+							<p>
+								<b>Released:</b> {film.year} <br />
+								<b>Genre:</b> {film.genre} <br />
+								<b>Runtime:</b> {film.runtime} <br />
+								<b>Actors:</b> {film.actors} <br />
+							</p>
+						</>
 					)}
-				</div>
-			</div>
-			<Container>
-				{film._id && (
-					<div style={{ marginTop: '5rem'}}>
-						<h2>Reviews</h2>
-						<ReviewList key={film._id} reviews={reviews} />
-					</div>
-				)}
-			</Container>
-		</div>
+					<span className='link-color' onClick={toggleDetails}>
+						{showFullDetails ? 'Show less' : 'Give more details'}
+					</span>
+				</Col>
+			</Row>
+			{film._id && (
+				<Row style={{ marginTop: '5rem' }}>
+					<h2>Reviews</h2>
+					<ReviewList key={film._id} reviews={reviews} />
+				</Row>
+			)}
+		</Container>
 	)
 }
 

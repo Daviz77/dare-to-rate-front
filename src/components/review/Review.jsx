@@ -8,26 +8,21 @@ import { followUser } from '../../services/UserService'
 import { Button, Card, CardImg, Col, ListGroupItem, Row } from 'react-bootstrap'
 import { createComment, getCommentByReviewId } from '../../services/CommentService'
 import './Review.css'
+import Star from '../../assets/Logo/Star.svg'
 
 function Review(props) {
 	const { review, isUserView } = props
 	const { currentUser } = useContext(AuthContext)
-	const [film, setFilm] = useState({})
 	const [likes, setLikes] = useState(review.likes)
 	const [showComments, setShowComments] = useState(false)
 	const [comments, setComments] = useState(review.comments)
 	const [isFollowing, setIsFollowing] = useState(currentUser?.followings.includes(review.author?._id))
 	const [newReview, setNewReview] = useState({})
-	const { _id, title, author, content, rating } = review
+	const { _id, title, author, film, content, rating } = review
 
-	useEffect(() => {
-		console.log(likes.includes(currentUser?._id));
-		if (isUserView && review.film) {
-			getFilmById(review.film)
-				.then((f) => setFilm(f))
-				.catch((error) => console.log(error))
-		}
-	}, [review.filmId, isUserView])
+	const StarIcon = () => {
+		return <img src={Star} alt='star' className='star-img' />
+	}
 
 	const handleLike = (reviewId) => {
 		likeReview(reviewId)
@@ -57,7 +52,7 @@ function Review(props) {
 					<Row className='margin-1'>
 						{isUserView ? (
 							<Link className='no-padding no-decoration' to={`/films?title=${encodeURIComponent(film?.title)}`}>
-								<CardImg src={film?.img} alt={film?.title} className='img-fluid rounded' />
+								<CardImg src={film?.poster} alt={film?.title} className='img-fluid' />
 								<h4 className='no-margin card-film-title'>{film?.title}</h4>
 							</Link>
 						) : (
@@ -68,12 +63,16 @@ function Review(props) {
 										{author?.username}
 									</h4>
 								</Link>
-								{currentUser && currentUser._id !== author?._id && isFollowing ? (
-									<p className='link-color follow-btn' onClick={() => handleFollow(author?._id)}>
-										Unfollow
-									</p>
-								) : (
-									<Button onClick={() => handleFollow(author?._id)}>Follow</Button>
+								{currentUser && (
+									<>
+										{isFollowing ? (
+											<span className='link-color follow-btn' onClick={() => handleFollow(author?._id)}>
+												Unfollow
+											</span>
+										) : (
+											<Button onClick={() => handleFollow(author?._id)}>Follow</Button>
+										)}
+									</>
 								)}
 							</>
 						)}
@@ -83,7 +82,10 @@ function Review(props) {
 					<Card.Body>
 						<Row>
 							<Col>
-								<span>Rating: {rating}</span>
+								<StarIcon />{' '}
+								<span>
+									<b id='rating'>{rating}</b>/10
+								</span>
 							</Col>
 							<Col style={{ textAlign: 'right' }}>
 								<span className='link-color'>Report</span>
@@ -107,13 +109,23 @@ function Review(props) {
 							</Col>
 							{currentUser && (
 								<Col style={{ textAlign: 'right' }}>
-									<Button
-										style={{ marginRight: '1rem' }}
-										className={likes.includes(currentUser._id) ? '' : 'outline-primary'}
-										onClick={() => handleLike(review._id)}
-									>
-										Like
-									</Button>
+									{likes.includes(currentUser._id) ? (
+										<Button
+											style={{ marginRight: '1rem' }}
+											className='btn-outline-primary'
+											onClick={() => handleLike(review._id)}
+										>
+											Unlike
+										</Button>
+									) : (
+										<Button
+											style={{ marginRight: '1rem' }}
+											className='btn-primary'
+											onClick={() => handleLike(review._id)}
+										>
+											Like
+										</Button>
+									)}
 									<Button onClick={() => handleNewComment(review._id)}>Add comment</Button>
 								</Col>
 							)}
