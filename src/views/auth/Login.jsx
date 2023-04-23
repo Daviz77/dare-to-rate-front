@@ -58,7 +58,7 @@ const Login = () => {
 								<Card.Body>
 									<div className='mb-3 mt-md-4'>
 										<h2 className='fw-bold'>Hello!</h2>
-										<p className=' mb-5'>Sign into your account</p>
+										<p>Sign into your account</p>
 										<form onSubmit={handleSubmit}>
 											<FormControl text='Email' error={touched.email && errors.email} htmlFor='email'>
 												<Input
@@ -84,7 +84,7 @@ const Login = () => {
 													type='password'
 												/>
 											</FormControl>
-											<div className=''>
+											<div className='d-grid'>
 												<button className='btn btn-primary' type='submit' disabled={isSubmitting}>
 													{isSubmitting ? 'Submitting...' : 'Submit'}
 												</button>

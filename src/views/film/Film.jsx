@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { getFilmByTitle, getFilmReviews } from '../../services/FilmService'
 import ReviewList from '../../components/reviewsList/ReviewsList'
 import { Col, Container, Row } from 'react-bootstrap'
-import Star from '../../assets/Logo/Star.svg'
+import Star from '../../assets/Logo/star.svg'
 
 function Film() {
 	const [film, setFilm] = useState({})

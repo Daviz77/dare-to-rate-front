@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, CardImg, Col, Row } from 'react-bootstrap'
 import './Comment.css'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ function Comment(props) {
 			<Row>
 				<Col md={1} className='avatar-img'>
 					<Link className='no-padding' to={`/users/${author?._id}`}>
-						<img src={author.img} alt='avatar' className='comment-avatar' />
+						<CardImg src={author.img} alt='avatar' className='comment-avatar' />
 					</Link>
 				</Col>
 				<Col md={11}>

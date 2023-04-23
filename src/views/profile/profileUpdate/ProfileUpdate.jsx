@@ -5,6 +5,7 @@ import { getCurrentUser, profileUpdate } from "../../../services/UserService"
 import { useNavigate } from "react-router-dom"
 import FormControl from "../../../components/formControl/FormControl"
 import Input from "../../../components/imput/Imput"
+import { Container } from "react-bootstrap"
 
 
 
@@ -56,7 +57,7 @@ const ProfileUpdate = () => {
 	})
 
 	return (
-		<div>
+		<Container>
 			<h1>Update profile</h1>
 
 			<form onSubmit={handleSubmit}>
@@ -119,7 +120,7 @@ const ProfileUpdate = () => {
 					{isSubmitting ? "Submitting..." : "Submit"}
 				</button>
 			</form>
-		</div>
+		</Container>
 	)
 }
 

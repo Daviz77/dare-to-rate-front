@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { getFilmById } from '../../services/FilmService'
 import CommentList from '../commentList/CommentList'
 import AuthContext from '../../contexts/AuthContext'
-import { createReview, likeReview } from '../../services/ReviewService'
+import { createReview, likeReview, deleteReview } from '../../services/ReviewService'
 import { Link } from 'react-router-dom'
 import { followUser } from '../../services/UserService'
-import { Button, Card, CardImg, Col, ListGroupItem, Row } from 'react-bootstrap'
-import { createComment, getCommentByReviewId } from '../../services/CommentService'
+import { Button, Card, CardImg, Col, Row } from 'react-bootstrap'
+import { getCommentByReviewId } from '../../services/CommentService'
 import './Review.css'
-import Star from '../../assets/Logo/Star.svg'
+import Star from '../../assets/Logo/star.svg'
+import ModalComment from '../modalComments/ModalComment'
 
 function Review(props) {
 	const { review, isUserView } = props
@@ -17,8 +17,12 @@ function Review(props) {
 	const [showComments, setShowComments] = useState(false)
 	const [comments, setComments] = useState(review.comments)
 	const [isFollowing, setIsFollowing] = useState(currentUser?.followings.includes(review.author?._id))
-	const [newReview, setNewReview] = useState({})
 	const { _id, title, author, film, content, rating } = review
+	const [deleteUserReview, setDeleteUserReview] = useState(false)
+	const [showModalComment, setShowModalComment] = useState(false)
+
+	const handleShowModalComment = () => setShowModalComment(true)
+	const handleCloseModalComment = () => setShowModalComment(false)
 
 	const StarIcon = () => {
 		return <img src={Star} alt='star' className='star-img' />
@@ -30,14 +34,15 @@ function Review(props) {
 			.catch((error) => console.log(error))
 	}
 
+	const handleDelete = (reviewId) => {
+		deleteReview(reviewId)
+			.then(() => setDeleteUserReview(true))
+			.catch((error) => console.log(error))
+	}
+
 	const updateComments = (reviewId) =>
 		getCommentByReviewId(reviewId)
 			.then((cs) => setComments(cs))
-			.catch((error) => console.log(error))
-
-	const handleNewComment = (commentRequest) =>
-		createComment(commentRequest)
-			.then(() => updateComments(commentRequest.reviewId))
 			.catch((error) => console.log(error))
 
 	const handleFollow = (userId) =>
@@ -104,11 +109,11 @@ function Review(props) {
 									onClick={() => setShowComments(!showComments)}
 									className='secondary-color cursor-pointer link-on-hover'
 								>
-									{comments?.length} comments
+									{comments ? <>{comments.length}</> : <>{0}</>} comments
 								</span>
 							</Col>
 							{currentUser && (
-								<Col style={{ textAlign: 'right' }}>
+								<Col className='review-btn'>
 									{likes.includes(currentUser._id) ? (
 										<Button
 											style={{ marginRight: '1rem' }}
@@ -126,16 +131,28 @@ function Review(props) {
 											Like
 										</Button>
 									)}
-									<Button onClick={() => handleNewComment(review._id)}>Add comment</Button>
+									<Button onClick={handleShowModalComment}>Add Comment</Button>
+									<ModalComment
+										show={showModalComment}
+										reviewId={review._id}
+										updateComments={updateComments}
+										closeModalComment={handleCloseModalComment}
+									/>
+
+									{currentUser && currentUser._id === author._id && (
+										<Button
+											className='btn-delete'
+											style={{ marginLeft: '1rem' }}
+											onClick={() => handleDelete(review._id)}
+										>
+											Delete
+										</Button>
+									)}
 								</Col>
 							)}
 						</Row>
 						<Row>
-							<div className='col-sm-12'>
-								{review.comments && review.comments.length > 0 && (
-									<>{showComments && <CommentList key={_id} comments={review.comments} />}</>
-								)}
-							</div>
+							{comments && comments.length > 0 && <>{showComments && <CommentList key={_id} comments={comments} />}</>}
 						</Row>
 					</Card.Body>
 				</Col>

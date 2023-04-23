@@ -25,7 +25,7 @@ const Landing = () => {
 	}, [])
 	return (
     <>
-      <div className='my-5' style={{padding: '3rem', margin: '0'}}>
+      <div className='my-5' style={{padding: '14rem', margin: '0'}}>
       <LogoDr />
         <Col>
           <h1>Watch a film. Rate it. Share it with the world.</h1>

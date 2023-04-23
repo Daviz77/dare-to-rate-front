@@ -19,9 +19,8 @@
 	margin-top: .3rem;
 }
 
-.comment-avatar  img{
-  width: 20px;
-  height: 20px;
+.comment-avatar {
+	border-radius: 50%;
 }
 
 

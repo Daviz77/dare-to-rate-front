@@ -1,5 +1,4 @@
 .navbar {
-  background-color: rgb(236, 233, 233);
   padding: 0;
   margin: 0;
 }
@@ -9,11 +8,11 @@
   font-size: 18px;
 }
 
-.navbar img {
-  margin-right: 10px;
+.navbar-img {
+  width: 0.5rem;
 }
 
-.profile-img {
+.navbar-profile-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;

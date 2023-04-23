@@ -16,11 +16,13 @@ const Home = () => {
 
 	return (
 		<Container>
-			<h2>Whats new?</h2>
-			<h3>Reviews from those you follow</h3>
+			<div className='header-home'>
+				<h2>Whats new?</h2>
+				<h3>Reviews from those you follow</h3>
+			</div>
 			<ReviewList reviews={reviews?.followedReviews} />
 
-			<h3 style={{marginTop: '2rem'}}>Reviews from others</h3>
+			<h3 style={{ marginTop: '2rem' }}>Reviews from others</h3>
 			<ReviewList reviews={reviews?.otherReviews} />
 		</Container>
 	)

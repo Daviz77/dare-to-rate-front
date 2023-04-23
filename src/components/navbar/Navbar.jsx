@@ -15,12 +15,12 @@ const Navbar = ({ currentUser }) => {
 		<nav className='navbar navbar-expand-lg navbar-light'>
 			<div className='container-fluid'>
 				{currentUser ? (
-					<Link className='navbar-brand' to='home'>
+					<Link className='navbar-img' to='home'>
 						<LogoDr />
 					</Link>
 				) : (
-					<Link className='navbar-brand' to=''>
-						Dare2Rate
+					<Link className='navbar-img' to=''>
+						<LogoDr />
 					</Link>
 				)}
 				<SearchBar />
@@ -29,7 +29,7 @@ const Navbar = ({ currentUser }) => {
 						<>
 							<span>Hello, {currentUser.username}</span>
 							<Link to='profile' className='no-decoration primary-color'>
-								<img src={currentUser.img} className='profile-img' alt='Profile' />
+								<img src={currentUser.img} className='navbar-profile-img' alt='Profile' />
 							</Link>
 						</>
 					) : (

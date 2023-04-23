@@ -23,6 +23,13 @@
   border-radius: 2rem;
 }
 
+.btn-delete{
+  background-color: #ee7a7a;
+  border-color: #000;
+  border-radius: 2rem;
+  color: #fff;
+}
+
 .btn-primary:hover {
   background-color: #8f7ffa;
   border-color: #8f7ffa;
@@ -80,11 +87,8 @@
 }
 
 .logo-img{
-  margin-bottom: 1rem;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+margin-bottom: 5%;
+margin-top: 0;
 }
 
 .my-3{
@@ -93,4 +97,8 @@
 
 .view-info {
   margin-top: 3rem;
+}
+
+.header-home {
+  margin-top: 2rem;
 }

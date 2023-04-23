@@ -12,3 +12,5 @@ export const getReviewsByUserId = (userId) => unauthenticatedHttp.get(`/users/${
 export const createReview = (reviewRequest) => authenticatedHttp.post('/reviews', reviewRequest)
 
 export const likeReview = (reviewId) => authenticatedHttp.post(`/reviews/${reviewId}/like`).then((res) => res.data)
+
+export const deleteReview = (reviewId) => authenticatedHttp.delete(`/reviews/${reviewId}`).then((res) => res.data)
