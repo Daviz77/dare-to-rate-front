@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { getFilmByTitle, getFilmReviews } from '../../services/FilmService'
 import ReviewList from '../../components/reviewsList/ReviewsList'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import Star from '../../assets/Logo/star.svg'
+import AuthContext from '../../contexts/AuthContext'
+import ModalReview from '../../components/modalReviews/ModalReview'
 
 function Film() {
 	const [film, setFilm] = useState({})
 	const [reviews, setReviews] = useState([])
 	const [searchParams] = useSearchParams()
 	const [showFullDetails, setShowFullDetails] = useState(false)
+	const { currentUser } = useContext(AuthContext)
+	const [showModalReview, setShowModalReview] = useState(false)
 
 	const StarIcon = () => {
 		return <img src={Star} alt='star' className='star-img' />
@@ -17,6 +21,10 @@ function Film() {
 
 	const toggleDetails = () => {
 		setShowFullDetails(!showFullDetails)
+	}
+
+	const deleteUserReview = (reviewId) => {
+		setReviews(reviews.filter((r) => r._id !== reviewId))
 	}
 
 	const shortPlot = film?.plot?.slice(0, 800) + '...'
@@ -40,17 +48,36 @@ function Film() {
 			})
 	}, [searchParams.get('title')])
 
+	const addReview = (review) => {
+		setReviews([...reviews, review])
+	}
+
+	const handleShowModalReview = () => setShowModalReview(true)
+	const handleCloseModalReview = () => setShowModalReview(false)
+
 	return (
 		<Container>
 			<Row className='view-info'>
-				<Col md={4}>
-					<img src={film.poster} alt={film.title} />
+				<Col style={{marginTop: '80px'}}md={4}>
+					<img src={film.poster} alt={film.title} style={{marginBottom: '1rem'}}/>
+					{currentUser && (
+						<>
+							<Button style={{marginLeft: '3rem'}}onClick={handleShowModalReview}>Add Review</Button>
+							<ModalReview
+								show={showModalReview}
+								filmId={film._id}
+								imdbId={film.imdbId}
+								closeModal={handleCloseModalReview}
+								addReview={addReview}
+							/>
+						</>
+					)}
 				</Col>
-				<Col md={8}>
+				<Col md={8} style={{marginTop: '80px'}}>
 					<h1>{film.title}</h1>
-					<p>
+					<h4>
 						<b>{film.director}</b>
-					</p>
+					</h4>
 					<p>
 						<StarIcon />{' '}
 						<span>
@@ -69,15 +96,15 @@ function Film() {
 							</p>
 						</>
 					)}
-					<span className='link-color' onClick={toggleDetails}>
+					<span className='link-color link' onClick={toggleDetails}>
 						{showFullDetails ? 'Show less' : 'Give more details'}
 					</span>
 				</Col>
 			</Row>
-			{film._id && (
+			{film._id && reviews.length > 0 && (
 				<Row style={{ marginTop: '5rem' }}>
-					<h2>Reviews</h2>
-					<ReviewList key={film._id} reviews={reviews} />
+					<h4 style={{margin: '0'}}>Reviews</h4>
+					<ReviewList key={film._id} reviews={reviews} deleteUserReview={deleteUserReview} />
 				</Row>
 			)}
 		</Container>

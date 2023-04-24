@@ -9,21 +9,21 @@ const Home = () => {
 	const { currentUser } = useContext(AuthContext)
 
 	useEffect(() => {
-		getAuthReviews().then((reviews) => {
-			setReviews(reviews)
-		})
+		getAuthReviews().then((reviews) => setReviews(reviews))
 	}, [currentUser])
 
 	return (
 		<Container>
-			<div className='header-home'>
-				<h2>Whats new?</h2>
-				<h3>Reviews from those you follow</h3>
+			<div className='header-home' style={{marginTop: '80px'}}>
+				<h2 className='p2'>
+					Whats <span className='span-new'>new?</span>
+				</h2>{' '}
+				<h4 style={{ marginTop: '2rem' }}>Reviews from those you follow</h4>
 			</div>
-			<ReviewList reviews={reviews?.followedReviews} />
+			<ReviewList reviews={reviews?.followedReviews} showReviewFilmTitle={true} />
 
-			<h3 style={{ marginTop: '2rem' }}>Reviews from others</h3>
-			<ReviewList reviews={reviews?.otherReviews} />
+			<h4 style={{ marginTop: '4rem' }}>Reviews from others</h4>
+			<ReviewList reviews={reviews?.otherReviews} showReviewFilmTitle={true} />
 		</Container>
 	)
 }

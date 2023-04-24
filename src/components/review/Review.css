@@ -1,19 +1,78 @@
 .author-img {
-  width: 60%;
-  height: 60%;
+	width: 80px;
+	height: 80px;
+}
+
+.film-img {
+  width: 50%;
+  height: auto;
 }
 
 .follow-btn {
-  padding: 0;
-  margin-top: 1rem;
+	padding: 0;
+	margin-top: 1rem;
 }
 
 #rating {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 .review-btn {
-text-align: right;
+	text-align: right;
+}
 
+button.btn-review-card {
+	height: 32px;
+	width: auto;
+	padding: 0 16px;
+	font-size: 1rem;
+  margin-top: 1rem;
+}
 
+button.btn-like {
+	background-color: #8f7ffa;
+	border-color: #8f7ffa;
+}
+
+button.color-link {
+  color: #8f7ffa;
+  filter: blur(24px);
+  border-color: #8f7ffa;
+}
+
+.list-item {
+  box-shadow: 10px 5px 5px #f5f5f5;
+  border-color: white;
+}
+
+#card-review-left {
+  border-radius: 1rem 0 0 1rem;
+  padding-top: 2rem;
+  text-align: center;
+
+}
+
+#card-review-right {
+  border-radius: 0 1rem 1rem 0;
+  padding: 2rem;
+}
+
+button.no-border {
+  background-color: transparent;
+  border: none;
+  color: #8f7ffa;
+}
+
+h4.card-left-info {
+  margin-top: .5rem;
+}
+
+.review-card {
+  margin-bottom: 1rem;
+}
+
+#btn-delete-review, #btn-report-review{
+  background-color: transparent;
+  border-color: transparent;
+  color: #8f7ffa;
 }

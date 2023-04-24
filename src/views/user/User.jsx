@@ -77,7 +77,7 @@ function User() {
 				{reviews.length > 0 && (
 					<Row style={{ marginTop: '5rem' }}>
 						<h2>Reviews</h2>
-						<ReviewList key={user._id} reviews={reviews} isUserView={true} />
+						<ReviewList key={user._id} reviews={reviews} isUserView={true} showReviewFilmTitle={true} />
 					</Row>
 				)}
 			</Row>

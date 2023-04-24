@@ -14,13 +14,13 @@ function SearchBar() {
 		}
 	}
 	return (
-		<div className='container'>
+		<div  style= {{marginTop: '24px', marginBottom: '24px'}} className='container'>
 			<div className='row height d-flex justify-content-center align-items-center'>
 				<div className='col-md-6'>
 					<div className='text'>
 						<input
 							type='text'
-							className='form-control form-control-lg'
+							className='form-control'
 							placeholder='Search movie...'
 							onKeyDown={handleKeyPress}
 						/>

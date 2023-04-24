@@ -60,11 +60,11 @@ const Signup = () => {
 			<div className='col-6'>
 				<Row className='align-items-center h-100'>
 					<Row className='vh-60 d-flex justify-content-center align-items-center'>
-						<Col md={8} lg={6} xs={12}>
-							<Card className='px-4'>
+						<Col md={9}>
+							<Card className='px-4' style={{ border: 'none' }}>
 								<Card.Body>
 									<div className='mb-3 mt-md-4'>
-										<h2 className='fw-bold'>Hello, friend!</h2>
+										<h1 className='fw-bold'>Hello, friend!</h1>
 									</div>
 									<div className='mb-3'>
 										<form onSubmit={handleSubmit}>
@@ -91,20 +91,7 @@ const Signup = () => {
 													placeholder='Enter your email...'
 												/>
 											</FormControl>
-
-											<FormControl text='About' error={touched.about && errors.about} htmlFor='about'>
-												<Input
-													id='about'
-													name='about'
-													type='textarea'
-													onChange={handleChange}
-													onBlur={handleBlur}
-													value={values.about}
-													error={touched.about && errors.about}
-													placeholder='Tell us about you...'
-												/>
-											</FormControl>
-
+											
 											<FormControl text='Password' error={touched.password && errors.password} htmlFor='password'>
 												<Input
 													id='password'
@@ -118,7 +105,20 @@ const Signup = () => {
 												/>
 											</FormControl>
 
-											<FormControl text='Image' error={touched.img && errors.img} htmlFor='img'>
+											<FormControl text='About (optional)' error={touched.about && errors.about} htmlFor='about'>
+												<Input
+													id='about'
+													name='about'
+													type='textarea'
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.about}
+													error={touched.about && errors.about}
+													placeholder='Tell us about you...'
+												/>
+											</FormControl>
+
+											<FormControl text='Image (optional)' error={touched.img && errors.img} htmlFor='img'>
 												<Input
 													id='img'
 													type='file'
@@ -131,7 +131,7 @@ const Signup = () => {
 													placeholder='Upload your image...'
 												/>
 											</FormControl>
-											<div className='d-grid'>
+											<div style={{ marginLeft: '11rem' }}>
 												<button className='btn btn-primary' type='submit' disabled={isSubmitting}>
 													{isSubmitting ? 'Submitting...' : 'Create account'}
 												</button>
@@ -154,14 +154,17 @@ const Signup = () => {
 			</div>
 			<div className='col-6'>
 				<Row className='align-items-center h-100' style={{ backgroundColor: '#fbea7f', textAlign: 'center' }}>
-					<div>
-						<h1>Gald to see you!</h1>
-						<p>
+					<Col md={1}></Col>
+					<Col md={10}>
+						{' '}
+						<h1>Glad to see you!</h1>
+						<p className='p1'>
 							Be part of the Dare to rate community and enjoy unlimited access to the best reviews and movies. Have
 							conversations about the movies you like the most and enjoy without limits as if you were a professional
 							movie critic.
 						</p>
-					</div>
+					</Col>
+					<Col md={1}></Col>
 				</Row>
 			</div>
 		</div>

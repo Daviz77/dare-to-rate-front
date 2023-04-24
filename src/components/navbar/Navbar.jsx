@@ -27,7 +27,7 @@ const Navbar = ({ currentUser }) => {
 				<div className='navbar' id='navbarSupportedContent'>
 					{currentUser ? (
 						<>
-							<span>Hello, {currentUser.username}</span>
+							<span>Hello, <b>{currentUser.username}</b></span>
 							<Link to='profile' className='no-decoration primary-color'>
 								<img src={currentUser.img} className='navbar-profile-img' alt='Profile' />
 							</Link>
@@ -37,14 +37,11 @@ const Navbar = ({ currentUser }) => {
 							{!hideNavLinks && (
 								<>
 									<NavLink
-										className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+										className='link-color'
 										to='/login'
 										style={{ marginRight: '10px' }}
 									>
 										Login
-									</NavLink>
-									<NavLink className='nav-link' to='/signup'>
-										Signup
 									</NavLink>
 								</>
 							)}

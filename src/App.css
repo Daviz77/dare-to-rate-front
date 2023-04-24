@@ -1,104 +1,190 @@
 .bg-color {
-  background-color: #fbea7f;
+	background-color: #fbea7f;
 }
 
 .secondary-color {
-  color: #a3a3a3;
+	color: #a3a3a3;
 }
 
 .primary-color {
-  color: #000;
+	color: #000;
 }
 
 .link-color {
-  color: #8f7ffa;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: bold;
+	color: #8f7ffa;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 .btn-primary {
-  background-color: #000;
-  border-color: #000;
-  border-radius: 2rem;
-}
-
-.btn-delete{
-  background-color: #ee7a7a;
-  border-color: #000;
-  border-radius: 2rem;
-  color: #fff;
+	background-color: #000;
+	border-color: #000;
+	border-radius: 2rem;
+	width: auto;
+	height: 48px;
+	font-weight: bold;
+	padding: 0 40px;
 }
 
 .btn-primary:hover {
-  background-color: #8f7ffa;
-  border-color: #8f7ffa;
+	background-color: #8f7ffa;
+	border-color: #8f7ffa;
 }
 
 .btn-outline-primary {
-  background-color: #fff;
-  border-color: #000;
-  color: #000;
-  border-radius: 2rem;
+	background-color: transparent;
+	border-color: #000;
+	color: #000;
+	border-radius: 2rem;
 }
 
 .btn-outline-primary:hover {
-  background-color: #8f7ffa;
-  border-color: #8f7ffa;
+	background-color: #8f7ffa;
+	border-color: #8f7ffa;
 }
 
 .link-on-hover:hover {
-  color: #8f7ffa;
+	color: #8f7ffa;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+	cursor: pointer;
 }
 
-.card-author-username, .card-film-title {
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-  color: #000;
+.card-author-username,
+.card-film-title {
+	font-weight: bold;
+	margin: 0;
+	color: #000;
 }
 
 .no-decoration {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .list-item {
-  margin-top: 1rem;
-}
-
-.margin-1 {
-  margin: 1rem;
+	margin-top: 1rem;
 }
 
 .no-padding {
-  padding: 0;
+	padding: 0;
 }
 
 .no-margin {
-  margin: 0;
+	margin: 0;
 }
 
 .no-margin-left {
-  margin-left: 0;
+	margin-left: 0;
 }
 
-.logo-img{
-margin-bottom: 5%;
-margin-top: 0;
+.logo-img {
+	margin-bottom: 5%;
+	margin-top: 0;
 }
 
-.my-3{
-  margin: 0rem !important;
+.my-3 {
+	margin: 0rem !important;
 }
 
 .view-info {
-  margin-top: 3rem;
+	margin-top: 3rem;
 }
 
 .header-home {
-  margin-top: 2rem;
+	margin-top: 2rem;
+}
+
+.no-boder {
+	border: none;
+}
+
+label.form-label {
+	font-weight: bold;
+	color: #000;
+	font-size: 14px;
+}
+
+input {
+	height: 48px;
+}
+
+input::placeholder {
+	color: #a3a3a3;
+}
+
+.card {
+	border-radius: 1rem;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.star-img {
+	margin: 0 0.3rem 1rem 0;
+}
+
+h1 {
+	font-size: 48px;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+h3 {
+	font-size: 32px;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+h4 {
+	font-size: 24px;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+h5 {
+	font-size: 16px;
+	font-weight: bold;
+	font-family: 'Poppins', sans-serif;
+}
+
+.p1 {
+	font-size: 20px;
+	font-weight: regular;
+	font-family: 'Inter', sans-serif;
+}
+
+p {
+	font-size: 16px;
+	font-weight: regular;
+	font-family: 'Inter', sans-serif;
+}
+
+.p3 {
+	font-size: 14px;
+	font-weight: regular;
+	font-family: 'Inter', sans-serif;
+}
+
+link {
+	font-size: 16px;
+	font-weight: regular;
+	color: #8f7ffa;
+	font-family: 'Inter', sans-serif;
+}
+
+.btn-review-add{
+  margin-left: 2rem;
+}
+
+.modal-content {
+  padding: 2rem;
 }

@@ -11,14 +11,13 @@ import Star from '../../assets/Logo/star.svg'
 import ModalComment from '../modalComments/ModalComment'
 
 function Review(props) {
-	const { review, isUserView } = props
+	const { review, isUserView, showReviewFilmTitle, deleteUserReview } = props
 	const { currentUser } = useContext(AuthContext)
 	const [likes, setLikes] = useState(review.likes)
 	const [showComments, setShowComments] = useState(false)
 	const [comments, setComments] = useState(review.comments)
 	const [isFollowing, setIsFollowing] = useState(currentUser?.followings.includes(review.author?._id))
 	const { _id, title, author, film, content, rating } = review
-	const [deleteUserReview, setDeleteUserReview] = useState(false)
 	const [showModalComment, setShowModalComment] = useState(false)
 
 	const handleShowModalComment = () => setShowModalComment(true)
@@ -36,7 +35,7 @@ function Review(props) {
 
 	const handleDelete = (reviewId) => {
 		deleteReview(reviewId)
-			.then(() => setDeleteUserReview(true))
+			.then(() => deleteUserReview(reviewId))
 			.catch((error) => console.log(error))
 	}
 
@@ -50,40 +49,44 @@ function Review(props) {
 			.then(() => setIsFollowing(!isFollowing))
 			.catch((error) => console.log(error))
 
+	const handleReport = (reviewId) => {
+		console.log('Not implemented yet')
+	}
+
 	return (
-		<Card className='list-item'>
-			<Row>
-				<Col md={2} className='no-margin-left bg-color'>
-					<Row className='margin-1'>
+		<Card className='list-item review-card'>
+			<Row className='list-review-item'>
+				<Col md={3} className='bg-color' id='card-review-left'>
+					<Row>
 						{isUserView ? (
 							<Link className='no-padding no-decoration' to={`/films?title=${encodeURIComponent(film?.title)}`}>
-								<CardImg src={film?.poster} alt={film?.title} className='img-fluid' />
-								<h4 className='no-margin card-film-title'>{film?.title}</h4>
+								<CardImg src={film?.poster} alt={film?.title} className='img-fluid film-img' />
+								<h4 className='no-margin card-film-title card-left-info'>{film?.title}</h4>
 							</Link>
 						) : (
-							<>
-								<Link className='no-padding no-decoration' to={`/users/${author?._id}`}>
+							<div style={{ alignItems: 'center', marginTop: '1rem' }}>
+								<Link className='no-padding no-decoration left-side-card' to={`/users/${author?._id}`}>
 									<CardImg src={author?.img} alt={author?.username} className='img-fluid rounded-circle author-img' />
-									<h4 className='no-margin card-author-username' style={{ marginTop: '.5rem' }}>
-										{author?.username}
-									</h4>
+									<h4 className='no-margin card-author-username card-left-info'>{author?.username}</h4>
 								</Link>
 								{currentUser && (
 									<>
 										{isFollowing ? (
-											<span className='link-color follow-btn' onClick={() => handleFollow(author?._id)}>
+											<Button className='no-border btn-review-card' onClick={() => handleFollow(author?._id)}>
 												Unfollow
-											</span>
+											</Button>
 										) : (
-											<Button onClick={() => handleFollow(author?._id)}>Follow</Button>
+											<Button className='btn-review-card' onClick={() => handleFollow(author?._id)}>
+												Follow
+											</Button>
 										)}
 									</>
 								)}
-							</>
+							</div>
 						)}
 					</Row>
 				</Col>
-				<Col md={10}>
+				<Col md={9} id='card-review-right'>
 					<Card.Body>
 						<Row>
 							<Col>
@@ -91,19 +94,53 @@ function Review(props) {
 								<span>
 									<b id='rating'>{rating}</b>/10
 								</span>
+								{showReviewFilmTitle && (
+									<Link
+										className='no-decoration link-color'
+										style={{ marginLeft: '1rem' }}
+										to={`/films?title=${encodeURIComponent(film?.title)}`}
+									>
+										{review.film.title}
+									</Link>
+								)}
+								<span className='secondary-color' style={{ marginLeft: '1rem' }}>
+									{new Date(review.createdAt).toLocaleDateString()}
+								</span>
 							</Col>
 							<Col style={{ textAlign: 'right' }}>
-								<span className='link-color'>Report</span>
+								{currentUser && (
+									<>
+										{currentUser._id === author?._id || currentUser?._id === author ? (
+											<Button
+												className='btn-review-card link'
+												id='btn-delete-review'
+												style={{ marginLeft: '1rem' }}
+												onClick={() => handleDelete(review._id)}
+											>
+												Delete
+											</Button>
+										) : (
+											<Button
+												className='btn-review-card'
+												id='btn-report-review'
+												style={{ marginLeft: '1rem' }}
+												onClick={() => handleReport(review._id)}
+											>
+												Report
+											</Button>
+										)}
+									</>
+								)}
 							</Col>
 						</Row>
 						<Row style={{ marginTop: '1rem' }}>
-							<h4 className='review-title'>{title}</h4>
-							<Card.Text className='review-content'>{content}</Card.Text>
+							<h5 className='review-title'>{title}</h5>
+							<p className='review-content'>{content}</p>
 						</Row>
 						<Row style={{ marginTop: '1rem' }}>
 							<Col>
 								<span style={{ marginRight: '1rem' }} className={'secondary-color'}>
-									{likes.length} likes
+									{likes?.length} likes
 								</span>
 								<span
 									onClick={() => setShowComments(!showComments)}
@@ -114,10 +151,10 @@ function Review(props) {
 							</Col>
 							{currentUser && (
 								<Col className='review-btn'>
-									{likes.includes(currentUser._id) ? (
+									{likes?.includes(currentUser._id) ? (
 										<Button
 											style={{ marginRight: '1rem' }}
-											className='btn-outline-primary'
+											className='btn-like btn-review-card'
 											onClick={() => handleLike(review._id)}
 										>
 											Unlike
@@ -125,29 +162,21 @@ function Review(props) {
 									) : (
 										<Button
 											style={{ marginRight: '1rem' }}
-											className='btn-primary'
+											className='btn-outline-primary btn-review-card color-link'
 											onClick={() => handleLike(review._id)}
 										>
 											Like
 										</Button>
 									)}
-									<Button onClick={handleShowModalComment}>Add Comment</Button>
+									<Button className='btn-review-card' onClick={handleShowModalComment}>
+										Comment
+									</Button>
 									<ModalComment
 										show={showModalComment}
 										reviewId={review._id}
 										updateComments={updateComments}
 										closeModalComment={handleCloseModalComment}
 									/>
-
-									{currentUser && currentUser._id === author._id && (
-										<Button
-											className='btn-delete'
-											style={{ marginLeft: '1rem' }}
-											onClick={() => handleDelete(review._id)}
-										>
-											Delete
-										</Button>
-									)}
 								</Col>
 							)}
 						</Row>

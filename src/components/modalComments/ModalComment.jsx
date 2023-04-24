@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import { createComment } from '../../services/CommentService'
+import { Container } from 'react-bootstrap'
 
 function ModalComment({ show, reviewId, updateComments, closeModalComment }) {
 	const [comment, setComment] = useState('')
@@ -21,7 +22,7 @@ function ModalComment({ show, reviewId, updateComments, closeModalComment }) {
 	}
 
 	return (
-		<>
+		<Container>
 			<Modal show={show} onHide={closeModalComment}>
 				<Modal.Header closeButton>
 					<Modal.Title>Create a new comment</Modal.Title>
@@ -30,7 +31,7 @@ function ModalComment({ show, reviewId, updateComments, closeModalComment }) {
 					<Form onSubmit={handleSubmit}>
 						<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
 							<Form.Label>Content</Form.Label>
-							<Form.Control rows={3} type='textarea' autoFocus onChange={(event) => setComment(event.target.value)} />
+							<Form.Control as='textarea' rows={3} type='number' autoFocus onChange={(event) => setComment(event.target.value)} />
 						</Form.Group>
 					</Form>
 				</Modal.Body>
@@ -38,12 +39,9 @@ function ModalComment({ show, reviewId, updateComments, closeModalComment }) {
 					<Button variant='primary' onClick={handleSubmit}>
 						Submit
 					</Button>
-					<Button variant='primary' onClick={closeModalComment}>
-						Close
-					</Button>
 				</Modal.Footer>
 			</Modal>
-		</>
+		</Container>
 	)
 }
 

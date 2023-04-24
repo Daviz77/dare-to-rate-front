@@ -38,8 +38,7 @@ const Profile = () => {
 						<p>
 							<span className='profile-stat-label'>Followers: </span>
 							<span className='profile-stat-number'>{followers.length}</span>
-						</p>
-						<p className='profile__stat'>
+							<br />
 							<span className='profile-stat-label'>Following: </span>
 							<span className='profile-stat-number'>{currentUser.followings.length}</span>
 						</p>
@@ -50,16 +49,16 @@ const Profile = () => {
 								Update Profile
 							</Button>
 						</Link>
-						<Button className='btn-logout' onClick={logout}>
+						<Button className='btn-review-card link' onClick={logout} id='btn-delete-review'>
 							Logout
 						</Button>
 					</div>
 				</Col>
 			</Row>
 			<Row className='reviews-profile'>
-				<h2>Your Reviews</h2>
-				</Row>
-				<p>{reviews.length > 0 && <ReviewList key={currentUser._id} reviews={reviews} isUserView={true} />}</p>
+				<h3>Your Reviews</h3>
+			</Row>
+			{reviews.length > 0 && <ReviewList key={currentUser._id} reviews={reviews} isUserView={true} />}
 		</Container>
 	)
 }
