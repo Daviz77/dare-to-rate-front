@@ -90,7 +90,7 @@ const ProfileUpdate = () => {
 						onBlur={handleBlur}
 						value={values.about}
 						error={touched.about && errors.about}
-						placeholder='Change your username...'
+						placeholder='Change yout about..'
 					/>
 				</FormControl>
 
