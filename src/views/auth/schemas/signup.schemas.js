@@ -12,6 +12,6 @@ export const signupSchema = Yup.object({
     .string('Password err')
     .min(8, 'Length invalid')
     .required('Required'),
-  img: Yup
+  image: Yup
     .string('Image err')
 })

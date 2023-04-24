@@ -1,13 +1,11 @@
-import { useFormik } from "formik"
-import { useContext } from "react"
-import AuthContext from "../../../contexts/AuthContext"
-import { getCurrentUser, profileUpdate } from "../../../services/UserService"
-import { useNavigate } from "react-router-dom"
-import FormControl from "../../../components/formControl/FormControl"
-import Input from "../../../components/imput/Imput"
-import { Container } from "react-bootstrap"
-
-
+import { useFormik } from 'formik'
+import { useContext } from 'react'
+import AuthContext from '../../../contexts/AuthContext'
+import { getCurrentUser, profileUpdate } from '../../../services/UserService'
+import { useNavigate } from 'react-router-dom'
+import FormControl from '../../../components/formControl/FormControl'
+import Input from '../../../components/imput/Imput'
+import { Container } from 'react-bootstrap'
 
 const ProfileUpdate = () => {
 	const { currentUser, getCurrentUser } = useContext(AuthContext)
@@ -37,13 +35,13 @@ const ProfileUpdate = () => {
 		onSubmit: (values) => {
 			const formData = new FormData()
 
-			formData.append("username", values.username)
-			formData.append("image", values.image)
-			formData.append("about", values.about)
+			formData.append('username', values.username)
+			formData.append('image', values.image)
+			formData.append('about', values.about)
 
 			profileUpdate(formData)
 				.then(() => {
-					getCurrentUser(() => navigate("/profile"))
+					getCurrentUser(() => navigate('/profile'))
 				})
 				.catch((err) => {
 					if (err?.response?.data?.errors) {
@@ -61,11 +59,7 @@ const ProfileUpdate = () => {
 			<h1>Update profile</h1>
 
 			<form onSubmit={handleSubmit}>
-				<FormControl
-					text='Username'
-					error={touched.username && errors.username}
-					htmlFor='username'
-				>
+				<FormControl text='Username' error={touched.username && errors.username} htmlFor='username'>
 					<Input
 						id='username'
 						name='username'
@@ -77,11 +71,7 @@ const ProfileUpdate = () => {
 					/>
 				</FormControl>
 
-				<FormControl
-					text='About'
-					error={touched.about && errors.about}
-					htmlFor='about'
-				>
+				<FormControl text='About' error={touched.about && errors.about} htmlFor='about'>
 					<Input
 						id='about'
 						name='about'
@@ -94,17 +84,13 @@ const ProfileUpdate = () => {
 					/>
 				</FormControl>
 
-				<FormControl
-					text='Image'
-					error={touched.image && errors.image}
-					htmlFor='image'
-				>
+				<FormControl text='Image' error={touched.image && errors.image} htmlFor='image'>
 					<Input
 						id='image'
 						type='file'
 						name='image'
 						onChange={(event) => {
-							setFieldValue("image", event.currentTarget.files[0])
+							setFieldValue('image', event.currentTarget.files[0])
 						}}
 						onBlur={handleBlur}
 						error={touched.image && errors.image}
@@ -112,12 +98,8 @@ const ProfileUpdate = () => {
 					/>
 				</FormControl>
 
-				<button
-					className='btn btn-primary'
-					type='submit'
-					disabled={isSubmitting}
-				>
-					{isSubmitting ? "Submitting..." : "Submit"}
+				<button className='btn btn-primary' type='submit' disabled={isSubmitting}>
+					{isSubmitting ? 'Submitting...' : 'Submit'}
 				</button>
 			</form>
 		</Container>

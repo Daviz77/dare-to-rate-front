@@ -5,13 +5,14 @@ import { signupSchema } from './schemas/signup.schemas'
 import { signup, login as loginService } from '../../services/AuthService'
 import { useContext } from 'react'
 import AuthContext from '../../contexts/AuthContext'
-import { Card, Col, Container, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 
 const initialValues = {
 	username: '',
 	email: '',
 	password: '',
-	img: '',
+	about: '',
+	image: '',
 }
 
 const Signup = () => {
@@ -27,19 +28,21 @@ const Signup = () => {
 		handleSubmit,
 		setSubmitting,
 		setFieldError,
+		setFieldValue
 	} = useFormik({
 		initialValues: initialValues,
 		validateOnBlur: true,
 		validateOnChange: false,
 		validationSchema: signupSchema,
 		onSubmit: (values) => {
-			signup({
-				username: values.username,
-				email: values.email,
-				password: values.password,
-				about: values.about,
-				img: values.img,
-			})
+			const formData = new FormData()
+			formData.append('username', values.username)
+			formData.append('email', values.email)
+			formData.append('password', values.password)
+			formData.append('about', values.about)
+			formData.append('image', values.image)
+
+			signup(formData)
 				.then(() => loginService({ email: values.email, password: values.password }))
 				.then((response) => {
 					login(response.accessToken)
@@ -91,7 +94,7 @@ const Signup = () => {
 													placeholder='Enter your email...'
 												/>
 											</FormControl>
-											
+
 											<FormControl text='Password' error={touched.password && errors.password} htmlFor='password'>
 												<Input
 													id='password'
@@ -118,16 +121,16 @@ const Signup = () => {
 												/>
 											</FormControl>
 
-											<FormControl text='Image (optional)' error={touched.img && errors.img} htmlFor='img'>
+											<FormControl text='Image (optional)' error={touched.image && errors.image} htmlFor='image'>
 												<Input
-													id='img'
+													id='image'
 													type='file'
-													name='img'
+													name='image'
 													onChange={(event) => {
-														setFieldValue('img', event.currentTarget.files[0])
+														setFieldValue('image', event.currentTarget.files[0])
 													}}
 													onBlur={handleBlur}
-													error={touched.img && errors.img}
+													error={touched.image && errors.image}
 													placeholder='Upload your image...'
 												/>
 											</FormControl>
